@@ -14,11 +14,17 @@ public class PlayerController : MonoBehaviour
 	public Rigidbody2D bullet;
 	public Transform fireTransform;
 
+	public GameObject UI;
+
 	private float lastTimeFired;
 
 	void Start ()
 	{
+		// Set HP to max HP
 		hitpoints = maxHitpoints;
+
+		// Update HP slider
+		updateHitpointSlider ();
 	}
 
 	void Update ()
@@ -35,6 +41,8 @@ public class PlayerController : MonoBehaviour
 		hitpoints = Mathf.Clamp (hitpoints -= amount, 0f, maxHitpoints);
 
 		// Destroy if no hp left
+		// Update HP slider
+		updateHitpointSlider ();
 		if (hitpoints == 0f) {
 			Destroy (gameObject);
 		}
@@ -55,5 +63,13 @@ public class PlayerController : MonoBehaviour
 
 		// Shoot bullet
 		bulletInstance.velocity = firePower * fireTransform.right;
+	private void updateHitpointSlider ()
+	{
+		// Get HP slider
+		Slider hitpointSlider = UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ();
+
+		// Update values
+		hitpointSlider.value = hitpoints;
+		hitpointSlider.maxValue = maxHitpoints;
 	}
 }
