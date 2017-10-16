@@ -7,7 +7,8 @@ public class GameController : MonoBehaviour
 {
 	private string status = "menu";
 
-	public GameObject menu;
+	public GameObject menuUI;
+	public GameObject playersUI;
 
 	public Text winner;
 
@@ -27,8 +28,9 @@ public class GameController : MonoBehaviour
 				// Set status to menu
 				status = "menu";
 
-				// Show menu
-				menu.SetActive (true);
+				// Show menu and hide player UI
+				menuUI.SetActive (true);
+				playersUI.SetActive (false);
 
 				// Get winner
 				GameObject player = GameObject.FindGameObjectWithTag ("Player");
@@ -45,8 +47,9 @@ public class GameController : MonoBehaviour
 
 	public void StartGame ()
 	{
-		// Hide menu
-		menu.SetActive (false);
+		// Hide menu and show player UI
+		menuUI.SetActive (false);
+		playersUI.SetActive (true);
 
 		// Find all spawn points
 		GameObject[] spawns = GameObject.FindGameObjectsWithTag ("Respawn");
