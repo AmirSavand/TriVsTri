@@ -23,7 +23,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Respawn
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a5257b3e24a7b42b68c7a86c544abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Blue Player
-  movementFactor: 1
-  color: {r: 0, g: 0, b: 1, a: 1}
+  playerName: Blue Player
+  playerFireKey: Fire1
+  playerMoveFactor: 1
+  playerUI: {fileID: 0}
   playerPrefab: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
     type: 2}
+  playerColor: {r: 0.20392157, g: 0.59607846, b: 0.85882354, a: 1}
