@@ -4,31 +4,39 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-	public string name = "Blue Player";
+	public string playerName = "Blue Player";
 
-	public string fireKey = "Fire1";
+	public string playerFireKey = "Fire1";
 
-	public float movementFactor = 1f;
+	public float playerMoveFactor = 1f;
 
-	public Color color = Color.blue;
+	public GameObject playerUI;
 
 	public GameObject playerPrefab;
+
+	public Color playerColor = Color.blue;
 
 	public void SpawnPlayer ()
 	{
 		// Spawn player
 		GameObject player = Instantiate (playerPrefab, transform.position, transform.rotation) as GameObject;
 
+		// Get player controller
+		PlayerController playerController = player.GetComponent<PlayerController> ();
+
 		// Set name
-		player.name = name;
-
-		// Set movement factor (direction)
-		player.GetComponent<MovementController> ().moveSpeed *= movementFactor;
-
-		// Set fire key
-		player.GetComponent<PlayerController> ().fireKey = fireKey;
+		player.name = playerName;
 
 		// Set color
-		player.GetComponent<SpriteRenderer> ().material.color = color;
+		player.GetComponent<SpriteRenderer> ().material.color = playerColor;
+
+		// Set movement factor (direction)
+		playerController.moveSpeed *= playerMoveFactor;
+
+		// Set fire key
+		playerController.fireKey = playerFireKey;
+
+		// Set UI
+		playerController.UI = playerUI;
 	}
 }
