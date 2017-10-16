@@ -19,6 +19,9 @@ public class DamageController : MonoBehaviour
 			
 			// Deal damage
 			other.GetComponent<PlayerController> ().damage (damage);
+
+			// Destroy bullet
+			Destroy (gameObject);
 		}
 	}
 }
