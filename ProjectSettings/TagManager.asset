@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Edge
   - Bullet
+  - Item
   layers:
   - Default
   - TransparentFX
