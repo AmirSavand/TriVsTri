@@ -45,11 +45,6 @@ public class PlayerController : MonoBehaviour
 			fire ();
 		}
 
-		// Stop player at edges (@TODO: Use edge collider)
-		if (transform.position.y > 14.7f || transform.position.y < -3.6f) {
-			moveSpeed *= -1f;
-		}
-
 		// Move player
 		transform.Translate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 	}
@@ -117,5 +112,13 @@ public class PlayerController : MonoBehaviour
 		// Update values
 		hitpointSlider.value = hitpoints;
 		hitpointSlider.maxValue = maxHitpoints;
+	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		// Reverse moving if hit bullets or edges
+		if (other.tag == "Edge" || other.tag == "Bullet") {
+			moveSpeed *= -1f;
+		}
 	}
 }
