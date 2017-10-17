@@ -8,10 +8,16 @@ public class HitpointController : MonoBehaviour
 
 	public float maxHitpoints = 100f;
 	public float hitpoints;
+
 	public bool isDead = false;
+
 	public AudioSource hitSound;
 	public AudioSource deadSound;
+
 	public GameObject UI;
+
+	public Transform movingToCollector;
+	public Transform movingFrom;
 
 	void Start ()
 	{
@@ -22,7 +28,23 @@ public class HitpointController : MonoBehaviour
 		updateHitpointSlider ();
 	}
 
-	public void damage (float amount)
+	void Update ()
+	{
+		// Dead and has a collector (being collected)
+		if (isDead && movingToCollector) {
+			
+			// Move to target
+			transform.position = Vector2.Lerp (movingFrom.position, movingToCollector.transform.position, Time.deltaTime * 2f);
+
+			// Scale down
+			transform.localScale = Vector3.Lerp (transform.localScale, new Vector2 (0.1f, 0.1f), Time.deltaTime);
+
+			// Remove gravity
+			GetComponent<Rigidbody2D> ().gravityScale = 0f;
+		}
+	}
+
+	public void damage (float amount, GameObject issuer)
 	{
 		if (isDead) {
 			return;
@@ -40,21 +62,45 @@ public class HitpointController : MonoBehaviour
 			// Set to death
 			isDead = true;
 
-			// Dead sound
-			deadSound.Play ();
+			// Get destroy time
+			float time = 0f;
 
-			// Destroy after audio finished
-			Destroy (gameObject, deadSound.clip.length);
+			// Dead sound
+			if (deadSound) {
+				deadSound.Play ();
+				time = deadSound.clip.length;
+			}
+
+			// If collectable (item)
+			if (tag == "Item") {
+
+				// Set to collector
+				movingToCollector = issuer.transform;
+
+				// Save start position
+				movingFrom = transform;
+
+			} else {
+				
+				// Destroy after audio finished
+				Destroy (gameObject, time);
+			}
 
 		} else {
 
 			// Hit sound
-			hitSound.Play ();
+			if (hitSound) {
+				hitSound.Play ();
+			}
 		}
 	}
 
 	private void updateHitpointSlider ()
 	{
+		if (!UI) {
+			return;
+		}
+
 		// Get HP slider
 		Slider hitpointSlider = UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ();
 

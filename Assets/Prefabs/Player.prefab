@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198655878764546}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 14.75, y: 5.5, z: 0}
+  m_LocalPosition: {x: -13.05, y: 3.41, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4481624343324082}
@@ -68,13 +68,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1755892791921776}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.702, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4412436546826032}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &60205580705030760
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -111,10 +111,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c9302f9b3271d7045bb3a1e09a57c6b4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8605ff9ddae0c0a469ff97f4b52d9ac8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.5
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -191,10 +191,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f6f0c8fdea4f1f44692ebaf162371a94, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8d6ea7be088ef8048a21a08afd9bbe62, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 3
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -356,9 +356,11 @@ MonoBehaviour:
   maxHitpoints: 100
   hitpoints: 0
   isDead: 0
-  hitSound: {fileID: 82404441169744768}
-  deadSound: {fileID: 82390026577553974}
+  hitSound: {fileID: 82390026577553974}
+  deadSound: {fileID: 82404441169744768}
   UI: {fileID: 0}
+  movingToCollector: {fileID: 0}
+  movingFrom: {fileID: 0}
 --- !u!114 &114648915921701190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,10 +373,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireKey: Fire1
+  stars: 0
+  diamonds: 0
   moveSpeed: 10
   firePower: 30
   fireRate: 0.25
-  bullet: {fileID: 50882397533471282, guid: 60b9b08fcbd72a84c98140fd8f4d3fce, type: 2}
+  bullet: {fileID: 50934884834532552, guid: 60b9b08fcbd72a84c98140fd8f4d3fce, type: 2}
   fireTransform: {fileID: 4481624343324082}
   fireSound: {fileID: 82689089677657344}
   UI: {fileID: 0}

@@ -22,8 +22,8 @@ public class GameController : MonoBehaviour
 			// Count remaining players
 			int playerCount = GameObject.FindGameObjectsWithTag ("Player").Length;
 
-			// Only 1 player remaining (winner)
-			if (playerCount == 1) {
+			// Less than 2 players remaining
+			if (playerCount < 2) {
 				
 				// Set status to menu
 				status = "menu";
@@ -33,14 +33,24 @@ public class GameController : MonoBehaviour
 				playersUI.SetActive (false);
 
 				// Get winner
-				GameObject player = GameObject.FindGameObjectWithTag ("Player");
+				GameObject winnerPlayer = GameObject.FindGameObjectWithTag ("Player");
 
-				// Show winner by name and color
-				winner.text = player.name + " Wins!";
-				winner.color = player.GetComponent<SpriteRenderer> ().material.color;
+				// Game has a winner
+				if (winnerPlayer) {
 
-				// Destroy winner object
-				Destroy (player);
+					// Show winner by name and color
+					winner.text = winnerPlayer.name + " Wins!";
+					winner.color = winnerPlayer.GetComponent<SpriteRenderer> ().material.color;
+
+					// Destroy winner object
+					Destroy (winnerPlayer);
+				}
+
+				// Draw
+				else {
+					winner.text = "Draw!";
+					winner.color = new Color32 (0x66, 0x66, 0x66, 0xFF);
+				}
 			}
 		}
 	}
@@ -56,7 +66,7 @@ public class GameController : MonoBehaviour
 
 		// Spawn all
 		foreach (GameObject spawn in spawns) {
-			spawn.GetComponent<SpawnPoint> ().SpawnPlayer ();
+			spawn.GetComponent<PlayerSpawn> ().SpawnPlayer ();
 		}
 
 		// Update status to running
