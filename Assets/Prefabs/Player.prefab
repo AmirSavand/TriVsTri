@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 82390026577553974}
   - component: {fileID: 82404441169744768}
   - component: {fileID: 114648915921701190}
+  - component: {fileID: 114581438554676196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -341,6 +342,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114581438554676196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198655878764546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e00e750d44655468a9319e51ca2b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHitpoints: 100
+  hitpoints: 0
+  isDead: 0
+  hitSound: {fileID: 82404441169744768}
+  deadSound: {fileID: 82390026577553974}
+  UI: {fileID: 0}
 --- !u!114 &114648915921701190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,11 +372,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireKey: Fire1
   moveSpeed: 10
-  maxHitpoints: 100
-  hitpoints: 0
-  isDead: 0
-  hitSound: {fileID: 82404441169744768}
-  deadSound: {fileID: 82390026577553974}
   firePower: 30
   fireRate: 0.25
   bullet: {fileID: 50882397533471282, guid: 60b9b08fcbd72a84c98140fd8f4d3fce, type: 2}
