@@ -14,13 +14,16 @@ public class DamageController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		// Hit player
-		if (other.tag == "Player") {
+		// Get HP controller
+		HitpointController hitpointController = other.GetComponent<HitpointController> ();
+
+		// If other has HP
+		if (hitpointController) {
 			
 			// Deal damage
-			other.GetComponent<PlayerController> ().damage (damage);
+			hitpointController.damage (damage);
 
-			// Destroy bullet
+			// Self distruct
 			Destroy (gameObject);
 		}
 	}

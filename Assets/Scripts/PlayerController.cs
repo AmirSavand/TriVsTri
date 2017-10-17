@@ -9,12 +9,6 @@ public class PlayerController : MonoBehaviour
 
 	public float moveSpeed = 20f;
 
-	public float maxHitpoints = 100f;
-	public float hitpoints;
-	public bool isDead = false;
-	public AudioSource hitSound;
-	public AudioSource deadSound;
-
 	public float firePower = 20f;
 	public float fireRate = 0.5f;
 	public Rigidbody2D bullet;
@@ -25,18 +19,20 @@ public class PlayerController : MonoBehaviour
 
 	private float lastTimeFired;
 
+	private HitpointController hitpointController;
+
 	void Start ()
 	{
-		// Set HP to max HP
-		hitpoints = maxHitpoints;
+		// Get components
+		hitpointController = GetComponent<HitpointController> ();
 
-		// Update HP slider
-		updateHitpointSlider ();
+		// Assign variables
+		hitpointController.UI = UI;
 	}
 
 	void Update ()
 	{
-		if (isDead) {
+		if (hitpointController.isDead) {
 			return;
 		}
 
@@ -49,40 +45,9 @@ public class PlayerController : MonoBehaviour
 		transform.Translate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 	}
 
-	public void damage (float amount)
-	{
-		if (isDead) {
-			return;
-		}
-
-		// Deal damage
-		hitpoints = Mathf.Clamp (hitpoints -= amount, 0f, maxHitpoints);
-
-		// Update HP slider
-		updateHitpointSlider ();
-
-		// Destroy if no HP left
-		if (hitpoints == 0f) {
-
-			// Set to death
-			isDead = true;
-
-			// Dead sound
-			deadSound.Play ();
-
-			// Destroy after audio finished
-			Destroy (gameObject, deadSound.clip.length);
-		
-		} else {
-			
-			// Hit sound
-			hitSound.Play ();
-		}
-	}
-
 	public void fire ()
 	{
-		if (isDead) {
+		if (hitpointController.isDead) {
 			return;
 		}
 
@@ -102,16 +67,6 @@ public class PlayerController : MonoBehaviour
 
 		// Fire sound
 		fireSound.Play ();
-	}
-
-	private void updateHitpointSlider ()
-	{
-		// Get HP slider
-		Slider hitpointSlider = UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ();
-
-		// Update values
-		hitpointSlider.value = hitpoints;
-		hitpointSlider.maxValue = maxHitpoints;
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
