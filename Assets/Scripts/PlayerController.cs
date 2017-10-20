@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
 	public int diamonds = 1;
 
 	public float moveSpeed = 20f;
+	public bool stop = false;
 
 	public float firePower = 20f;
 	public float fireRate = 0.5f;
 	public Rigidbody2D bullet;
 	public Transform fireTransform;
 	public AudioSource fireSound;
+
+	public int weaponLevel = 0;
 
 	public GameObject UI;
 
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (hitpointController.isDead) {
+		if (hitpointController.isDead || stop) {
 			return;
 		}
 
@@ -50,34 +53,6 @@ public class PlayerController : MonoBehaviour
 		// Move player
 		transform.Translate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 
-	}
-
-	public void fire ()
-	{
-		if (hitpointController.isDead) {
-			return;
-		}
-
-		// Check fire rate
-		if (Time.fixedTime - lastTimeFired < fireRate) {
-			return;
-		}
-
-		// Save fire rate
-		lastTimeFired = Time.fixedTime;
-
-		// Create bullet
-		Rigidbody2D bulletInstance = Instantiate (bullet, fireTransform.position, fireTransform.rotation) as Rigidbody2D;
-
-		// Shoot bullet
-		bulletInstance.GetComponent<Transform> ().localRotation = fireTransform.rotation;
-		bulletInstance.velocity = firePower * fireTransform.up;
-
-		// Set issuer
-		bulletInstance.GetComponent<DamageController> ().issuer = gameObject;
-
-		// Fire sound
-		fireSound.Play ();
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -109,7 +84,52 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void updateResources ()
+	public void fire (bool ignoreRate = false, int shotNumber = 1)
+	{
+		if (hitpointController.isDead || stop) {
+			return;
+		}
+
+		// Check fire rate
+		if (!ignoreRate && Time.fixedTime - lastTimeFired < fireRate) {
+			return;
+		}
+
+		// Save fire rate
+		lastTimeFired = Time.fixedTime;
+
+		// Initial position and velocity of bullet
+		Vector2 position = fireTransform.position;
+		Vector3 velocity = fireTransform.up * firePower;
+
+		// Push bullets up if not initial bullet
+		if (ignoreRate) {
+			position.y += 0.5f * shotNumber;
+			velocity.y += 0.5f * shotNumber;
+		}
+
+		// Create bullet
+		Rigidbody2D bulletInstance = Instantiate (bullet, position, transform.rotation) as Rigidbody2D;
+
+		// Shoot bullet
+		bulletInstance.GetComponent<Transform> ().localRotation = fireTransform.rotation;
+		bulletInstance.velocity = velocity;
+
+		// Set issuer
+		bulletInstance.GetComponent<DamageController> ().issuer = gameObject;
+
+		// Fire sound
+		fireSound.Play ();
+
+		// Fire multiple shots based on weapon level
+		if (!ignoreRate) {
+			for (int i = 0; i < weaponLevel; i++) {
+				fire (true, i + 1);
+			}
+		}
+	}
+
+	public void updateResources ()
 	{
 		// Update resources
 		UI.transform.Find ("Diamonds").GetComponentInChildren<Text> ().text = "" + diamonds;

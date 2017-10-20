@@ -355,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitpoints: 100
   hitpoints: 0
+  destroyAfterDeath: 0
   isDead: 0
   hitSound: {fileID: 82390026577553974}
   deadSound: {fileID: 82404441169744768}
@@ -373,14 +374,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireKey: Fire1
-  stars: 0
-  diamonds: 0
-  moveSpeed: 10
+  stars: 10
+  diamonds: 1
+  moveSpeed: 20
+  stop: 0
   firePower: 30
-  fireRate: 0.25
-  bullet: {fileID: 50934884834532552, guid: 60b9b08fcbd72a84c98140fd8f4d3fce, type: 2}
+  fireRate: 0.5
+  bullet: {fileID: 50518579823483974, guid: 184720d51fc03d54ca02934e2366c8dc, type: 2}
   fireTransform: {fileID: 4481624343324082}
   fireSound: {fileID: 82689089677657344}
+  weaponLevel: 0
   UI: {fileID: 0}
 --- !u!212 &212606654521649498
 SpriteRenderer:

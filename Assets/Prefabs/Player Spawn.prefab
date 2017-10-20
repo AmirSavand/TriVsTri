@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4953299663164642}
-  - component: {fileID: 114810609939422710}
   - component: {fileID: 114875504811603040}
   m_Layer: 0
   m_Name: Player Spawn
@@ -40,29 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &114810609939422710
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1846074278893848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a5257b3e24a7b42b68c7a86c544abc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: Blue Player
-  playerFireKey: Fire1
-  playerMoveFactor: 1
-  playerUI: {fileID: 0}
-  playerPrefab: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
-    type: 2}
-  playerColor:
-    r: 0.20392157
-    g: 0.59607846
-    b: 0.85882354
-    a: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &114875504811603040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,10 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91145f0f9e244be458e6b424b09e937d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Blue Player
+  playerName: Red Player
   playerFireKey: Fire1
   playerMoveFactor: 1
   playerUI: {fileID: 0}
+  shopUI: {fileID: 0}
   playerPrefab: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
     type: 2}
-  playerColor: {r: 0, g: 0, b: 1, a: 1}
+  playerColor: {r: 1, g: 0.47794116, b: 0.47794116, a: 1}

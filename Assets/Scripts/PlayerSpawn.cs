@@ -12,6 +12,8 @@ public class PlayerSpawn : MonoBehaviour
 
 	public GameObject playerUI;
 
+	public GameObject shopUI;
+
 	public GameObject playerPrefab;
 
 	public Color playerColor = Color.blue;
@@ -20,6 +22,9 @@ public class PlayerSpawn : MonoBehaviour
 	{
 		// Spawn player
 		GameObject player = Instantiate (playerPrefab, transform.position, transform.rotation) as GameObject;
+
+		// Assign player to shop manager
+		shopUI.GetComponent<ShopManager> ().player = player;
 
 		// Get player controller
 		PlayerController playerController = player.GetComponent<PlayerController> ();

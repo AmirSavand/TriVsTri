@@ -16,11 +16,22 @@ public class Movement : MonoBehaviour
 
 		// No gravity scale
 		rigidBody.gravityScale = 0f;
+
+		// Random move speed
+		moveSpeed = Random.Range (moveSpeed - 1f, moveSpeed + 1f);
 	}
 
 	void Update ()
 	{
 		// Move down
 		transform.Translate (Vector2.down * Time.deltaTime * moveSpeed, Space.World);
+	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		// Hit edge
+		if (other.tag == "Edge") {
+			Destroy (gameObject);
+		}
 	}
 }

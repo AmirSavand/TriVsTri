@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class HitpointController : MonoBehaviour
 {
-
 	public float maxHitpoints = 100f;
 	public float hitpoints;
 
+	public bool destroyAfterDeath = true;
 	public bool isDead = false;
 
 	public AudioSource hitSound;
@@ -56,7 +56,7 @@ public class HitpointController : MonoBehaviour
 		// Update HP slider
 		updateHitpointSlider ();
 
-		// Destroy if no HP left
+		// Kill if no HP left
 		if (hitpoints == 0f) {
 
 			// Set to death
@@ -79,8 +79,11 @@ public class HitpointController : MonoBehaviour
 
 				// Save start position
 				movingFrom = transform;
+			
+			}
 
-			} else {
+			// If needs to be destroyed after dying
+			else if (destroyAfterDeath) {
 				
 				// Destroy after audio finished
 				Destroy (gameObject, time);
@@ -95,17 +98,32 @@ public class HitpointController : MonoBehaviour
 		}
 	}
 
-	private void updateHitpointSlider ()
+	public void heal (float amount = -1f)
+	{
+		// If amount was not given, heal fully
+		if (amount == -1f) {
+			amount = maxHitpoints;
+		}
+
+		// Otherwize heal by amount
+		else {
+			// Set min and max amount of healing
+			amount = Mathf.Clamp (amount, 1f, maxHitpoints);
+		}
+
+		// Heal and update UI
+		isDead = false;
+		hitpoints = amount;
+		updateHitpointSlider ();
+	}
+
+	public void updateHitpointSlider ()
 	{
 		if (!UI) {
 			return;
 		}
 
-		// Get HP slider
-		Slider hitpointSlider = UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ();
-
-		// Update values
-		hitpointSlider.value = hitpoints;
-		hitpointSlider.maxValue = maxHitpoints;
+		// Update value
+		UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ().value = hitpoints / maxHitpoints * 100;
 	}
 }

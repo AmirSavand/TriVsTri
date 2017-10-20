@@ -7,7 +7,7 @@ PlayerSettings:
   productGUID: ac1cdff218c257c4c9cd2e8a90f2c536
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 3
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -145,8 +145,8 @@ PlayerSettings:
   m_ColorGamuts: 00000000
   targetPixelDensity: 0
   resolutionScalingMode: 0
-  androidSupportedAspectRatio: 1
-  androidMaxAspectRatio: 2.1
+  androidSupportedAspectRatio: 2
+  androidMaxAspectRatio: 16.9
   applicationIdentifier:
     Android: com.SavandBros.TriVsTri
   buildNumber: {}
