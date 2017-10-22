@@ -59,13 +59,14 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if (hitpointController.isDead) {
-			return;
-		}
-
 		// Reverse moving if hit bullets/edges
 		if (other.CompareTag ("Bullet") || other.CompareTag ("Edge")) {
 			moveSpeed *= -1f;
+		}
+
+		// Don't collect if dead
+		if (hitpointController.isDead) {
+			return;
 		}
 
 		// Collect if hit item
