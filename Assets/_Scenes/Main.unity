@@ -4123,6 +4123,21 @@ Prefab:
       propertyPath: playerName
       value: Red Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: stop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: isReady
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: isDead
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
   m_IsPrefabParent: 0
@@ -5334,6 +5349,26 @@ Prefab:
         type: 2}
       propertyPath: playerName
       value: Blue Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: moveSpeed
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: stop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: isReady
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
+        type: 2}
+      propertyPath: isDead
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
