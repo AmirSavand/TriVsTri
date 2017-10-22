@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
 
 	public float moveSpeed = 2f;
@@ -27,10 +27,10 @@ public class Movement : MonoBehaviour
 		transform.Translate (Vector2.down * Time.deltaTime * moveSpeed, Space.World);
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
+	void OnTriggerExit2D (Collider2D other)
 	{
-		// Hit edge
-		if (other.tag == "Edge") {
+		// Hit inner edge
+		if (other.name == "Inner Edge") {
 			Destroy (gameObject);
 		}
 	}

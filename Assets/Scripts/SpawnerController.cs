@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSpawn : MonoBehaviour
+public class SpawnerController : MonoBehaviour
 {
 	public GameObject[] items;
 

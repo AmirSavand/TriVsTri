@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+	public string playerName = "Player";
 	public string fireKey = "Fire1";
+	public bool isReady = true;
+	public GameObject UI;
 
 	public int stars = 1;
 	public int diamonds = 1;
@@ -13,6 +16,7 @@ public class PlayerController : MonoBehaviour
 	public float moveSpeed = 20f;
 	public bool stop = false;
 
+	public float fireDamage = 20f;
 	public float firePower = 20f;
 	public float fireRate = 0.5f;
 	public Rigidbody2D bullet;
@@ -20,8 +24,6 @@ public class PlayerController : MonoBehaviour
 	public AudioSource fireSound;
 
 	public int weaponLevel = 0;
-
-	public GameObject UI;
 
 	private float lastTimeFired;
 
@@ -57,8 +59,12 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		// Reverse moving if hit bullets or edges
-		if (other.tag == "Edge" || other.tag == "Bullet") {
+		if (hitpointController.isDead) {
+			return;
+		}
+
+		// Reverse moving if hit bullets/edges
+		if (other.CompareTag ("Bullet") || other.CompareTag ("Edge")) {
 			moveSpeed *= -1f;
 		}
 
@@ -115,8 +121,9 @@ public class PlayerController : MonoBehaviour
 		bulletInstance.GetComponent<Transform> ().localRotation = fireTransform.rotation;
 		bulletInstance.velocity = velocity;
 
-		// Set issuer
+		// Set issuer and power
 		bulletInstance.GetComponent<DamageController> ().issuer = gameObject;
+		bulletInstance.GetComponent<DamageController> ().damage = fireDamage;
 
 		// Fire sound
 		fireSound.Play ();

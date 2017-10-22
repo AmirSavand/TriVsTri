@@ -10,15 +10,15 @@ public class DamageController : MonoBehaviour
 
 	void Start ()
 	{
-		// Destroy bullet after 4 seconds
-		Destroy (gameObject, 4f);
+		// Destroy bullet in case of not hitting any edge
+		Destroy (gameObject, 10f);
 	}
 
 	void Update ()
 	{
+		// Face where it's going
 		transform.up = GetComponent<Rigidbody2D> ().velocity;
 	}
-
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
@@ -32,6 +32,14 @@ public class DamageController : MonoBehaviour
 			hitpointController.damage (damage, issuer);
 
 			// Self distruct (if target is not dead)
+			Destroy (gameObject);
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D other)
+	{
+		// Hit inner edge
+		if (other.name == "Inner Edge") {
 			Destroy (gameObject);
 		}
 	}

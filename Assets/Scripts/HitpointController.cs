@@ -19,6 +19,11 @@ public class HitpointController : MonoBehaviour
 	public Transform movingToCollector;
 	public Transform movingFrom;
 
+	public GameObject deathItem;
+	public int deathItemCount;
+
+	private PlayerController playerController;
+
 	void Start ()
 	{
 		// Set HP to max HP
@@ -26,6 +31,9 @@ public class HitpointController : MonoBehaviour
 
 		// Update HP slider
 		updateHitpointSlider ();
+
+		// Get player controller
+		playerController = GetComponent<PlayerController> ();
 	}
 
 	void Update ()
@@ -45,8 +53,8 @@ public class HitpointController : MonoBehaviour
 	}
 
 	public void damage (float amount, GameObject issuer)
-	{
-		if (isDead) {
+	{	
+		if (isDead || (playerController && playerController.stop)) {
 			return;
 		}
 
@@ -71,6 +79,26 @@ public class HitpointController : MonoBehaviour
 				time = deadSound.clip.length;
 			}
 
+			// If has item drop
+			if (deathItemCount > 0) {
+				
+				// As much as item count
+				for (int i = 0; i < deathItemCount; i++) {
+					
+					// Different positions
+					Vector2 position = new Vector2 (transform.position.x * i, transform.position.y * i);
+
+					// Drop items
+					HitpointController deathItemInstance = Instantiate (deathItem, position, transform.rotation).GetComponent<HitpointController> ();
+
+					// Collect by issuer
+					deathItemInstance.damage (1f, issuer);
+
+					// Sound like 1 item
+					deathItemInstance.GetComponent<AudioSource> ().volume /= deathItemCount;
+				}
+			}
+
 			// If collectable (item)
 			if (tag == "Item") {
 
@@ -80,6 +108,8 @@ public class HitpointController : MonoBehaviour
 				// Save start position
 				movingFrom = transform;
 			
+				// No movement
+				GetComponent<MovementController> ().moveSpeed = 0;
 			}
 
 			// If needs to be destroyed after dying

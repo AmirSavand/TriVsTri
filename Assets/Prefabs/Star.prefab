@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 50860664588513216}
   - component: {fileID: 82532420386954672}
   - component: {fileID: 114810772234327208}
-  - component: {fileID: 114993857951478154}
-  - component: {fileID: 114522295752575444}
+  - component: {fileID: 114663002314149934}
+  - component: {fileID: 114588496802601926}
   m_Layer: 0
   m_Name: Star
   m_TagString: Item
@@ -181,7 +181,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114522295752575444
+--- !u!114 &114588496802601926
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -189,10 +189,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1898888819907496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9dc761d3c94aee44b450868a3f3a8fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 581fc94ba299e9b479adb005fc56a6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+--- !u!114 &114663002314149934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1898888819907496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a0287121c00c4cba78b159a029e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Star
+  amount: 5
 --- !u!114 &114810772234327208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,25 +219,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitpoints: 1
   hitpoints: 0
+  destroyAfterDeath: 1
   isDead: 0
   hitSound: {fileID: 82532420386954672}
   deadSound: {fileID: 82532420386954672}
   UI: {fileID: 0}
   movingToCollector: {fileID: 0}
   movingFrom: {fileID: 0}
---- !u!114 &114993857951478154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1898888819907496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21c2a5f9d2aa533489c231ba36ede3d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: Star
-  amount: 5
+  deathItem: {fileID: 0}
+  deathItemCount: 0
 --- !u!212 &212903799007281676
 SpriteRenderer:
   m_ObjectHideFlags: 1

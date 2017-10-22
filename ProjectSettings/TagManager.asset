@@ -7,6 +7,8 @@ TagManager:
   - Edge
   - Bullet
   - Item
+  - Upgrade
+  - Panel
   layers:
   - Default
   - TransparentFX

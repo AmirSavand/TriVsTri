@@ -37,8 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4007942788501104}
-  - component: {fileID: 114506100368689854}
   - component: {fileID: 50518579823483974}
+  - component: {fileID: 114506100368689854}
   m_Layer: 0
   m_Name: Bullet Green
   m_TagString: Bullet

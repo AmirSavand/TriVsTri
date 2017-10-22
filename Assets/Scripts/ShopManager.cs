@@ -6,29 +6,83 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
 	public GameObject player;
-	public PlayerController playerController;
+	private PlayerController playerController;
+	private UpgradeController playerUpgradeController;
+
+	private GameManager gameManager;
 
 	public Button weaponButton;
 	public Button fireRateButton;
 	public Button firePowerButton;
 	public Button maxHitpointsButton;
+	public Button readyButton;
 
-	void Start ()
+	public Upgrade[] upgrades;
+
+	void Awake ()
 	{
-		// Get player controller
+		// Get components
 		playerController = player.GetComponent<PlayerController> ();
+		playerUpgradeController = player.GetComponent<UpgradeController> ();
+		gameManager = GameObject.Find ("Game").GetComponent<GameManager> ();
 
-		// Get buttons
-		weaponButton = transform.Find ("Weapon Button").GetComponent<Button> ();
-		fireRateButton = transform.Find ("Fire Rate Button").GetComponent<Button> ();
-		firePowerButton = transform.Find ("Fire Power Button").GetComponent<Button> ();
-		maxHitpointsButton = transform.Find ("Max Hitpoints Button").GetComponent<Button> ();
+		// Get upgrades
+		upgrades = GameObject.Find ("Data").GetComponentsInChildren<Upgrade> ();
 
-		// Set listeners
-		weaponButton.onClick.AddListener (upgradeWeapon);
-		fireRateButton.onClick.AddListener (upgradeFireRate);
-		firePowerButton.onClick.AddListener (upgradeFirePower);
-		maxHitpointsButton.onClick.AddListener (upgradeMaxHitpoints);
+		// Panel button
+		GameObject panelButton = GameObject.Find ("Panel Button");
+
+		// Create upgrade buttons
+		foreach (Upgrade upgrade in upgrades) {
+			
+			// Clone button
+			GameObject button = Instantiate (panelButton);
+
+			// Attach to panel
+			button.transform.SetParent (transform);
+
+			// Set texts
+			button.GetComponentsInChildren<Text> () [0].text = "+" + Mathf.Abs (upgrade.amount);
+			button.GetComponentsInChildren<Text> () [1].text = "" + upgrade.title;
+			button.GetComponentsInChildren<Text> () [2].text = "" + upgrade.price;
+
+			// Set price type
+			button.transform.Find ("Price " + upgrade.priceType.type).gameObject.SetActive (true);
+
+			// On click event
+			button.GetComponent<Button> ().onClick.AddListener (() => upgradeClick (upgrade));
+		}
+
+		// Create ready button
+		readyButton = Instantiate (GameObject.Find ("Ready Button").GetComponent<Button> ()) as Button;
+
+		// Get ready button
+		readyButton.transform.SetParent (transform);
+	}
+
+	void OnEnable ()
+	{
+		// Interactiable
+		readyButton.interactable = true;
+		readyButton.onClick.AddListener (readyPlayer);
+	}
+
+	void upgradeClick (Upgrade upgrade)
+	{
+		// Upgrade via controller
+		playerUpgradeController.upgrade (upgrade);
+	}
+
+	public void readyPlayer ()
+	{
+		// Make player reaedy
+		playerController.isReady = true;
+
+		// Call it
+		gameManager.readyPlayer (playerController);
+
+		// Disable ready button
+		readyButton.interactable = false;
 	}
 
 	public void upgradeWeapon ()

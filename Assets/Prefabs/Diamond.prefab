@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 50123511536590394}
   - component: {fileID: 82522219515546514}
   - component: {fileID: 114881450696693156}
-  - component: {fileID: 114425126964585586}
-  - component: {fileID: 114901133314923350}
+  - component: {fileID: 114064647411655666}
+  - component: {fileID: 114570089401253918}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Item
@@ -177,7 +177,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114425126964585586
+--- !u!114 &114064647411655666
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -185,11 +185,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431513522190434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21c2a5f9d2aa533489c231ba36ede3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d0a0287121c00c4cba78b159a029e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: Diamond
   amount: 1
+--- !u!114 &114570089401253918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431513522190434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581fc94ba299e9b479adb005fc56a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!114 &114881450696693156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,24 +215,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitpoints: 1
   hitpoints: 0
+  destroyAfterDeath: 1
   isDead: 0
   hitSound: {fileID: 82522219515546514}
   deadSound: {fileID: 82522219515546514}
   UI: {fileID: 0}
   movingToCollector: {fileID: 0}
   movingFrom: {fileID: 0}
---- !u!114 &114901133314923350
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1431513522190434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9dc761d3c94aee44b450868a3f3a8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
+  deathItem: {fileID: 0}
+  deathItemCount: 0
 --- !u!212 &212904305497645336
 SpriteRenderer:
   m_ObjectHideFlags: 1

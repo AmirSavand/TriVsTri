@@ -21,11 +21,13 @@ GameObject:
   - component: {fileID: 4412436546826032}
   - component: {fileID: 212606654521649498}
   - component: {fileID: 60205580705030760}
+  - component: {fileID: 50506681561047560}
   - component: {fileID: 82689089677657344}
   - component: {fileID: 82390026577553974}
   - component: {fileID: 82404441169744768}
   - component: {fileID: 114648915921701190}
   - component: {fileID: 114581438554676196}
+  - component: {fileID: 114201465348001660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -54,9 +56,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198655878764546}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -13.05, y: 3.41, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 17.16, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 4481624343324082}
   m_Father: {fileID: 0}
@@ -75,6 +77,26 @@ Transform:
   m_Father: {fileID: 4412436546826032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50506681561047560
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198655878764546}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &60205580705030760
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -91,7 +113,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 64, y: 64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -342,6 +364,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114201465348001660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198655878764546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea823bafc6b5444f9eb97a1b0cd0346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 114648915921701190}
+  hitpointController: {fileID: 114581438554676196}
 --- !u!114 &114581438554676196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,6 +397,8 @@ MonoBehaviour:
   UI: {fileID: 0}
   movingToCollector: {fileID: 0}
   movingFrom: {fileID: 0}
+  deathItem: {fileID: 1898888819907496, guid: db5f3d1e3f06bdc4fb90b0f08d7d0add, type: 2}
+  deathItemCount: 10
 --- !u!114 &114648915921701190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,18 +410,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32292b50d4dee9248868990eb641d9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Player
   fireKey: Fire1
-  stars: 10
-  diamonds: 1
-  moveSpeed: 20
+  isReady: 0
+  UI: {fileID: 0}
+  stars: 0
+  diamonds: 0
+  moveSpeed: 15
   stop: 0
+  fireDamage: 20
   firePower: 30
-  fireRate: 0.5
-  bullet: {fileID: 50518579823483974, guid: 184720d51fc03d54ca02934e2366c8dc, type: 2}
+  fireRate: 0.8
+  bullet: {fileID: 50934884834532552, guid: 60b9b08fcbd72a84c98140fd8f4d3fce, type: 2}
   fireTransform: {fileID: 4481624343324082}
   fireSound: {fileID: 82689089677657344}
   weaponLevel: 0
-  UI: {fileID: 0}
 --- !u!212 &212606654521649498
 SpriteRenderer:
   m_ObjectHideFlags: 1

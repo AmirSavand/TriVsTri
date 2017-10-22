@@ -13,15 +13,20 @@ public class GameManager : MonoBehaviour
 
 	public Text winnerText;
 
-	public List<GameObject> spawnPoints;
+	private GameObject[] players;
+
+	void Start ()
+	{
+		// Get players
+		players = GameObject.FindGameObjectsWithTag ("Player");
+	}
 
 	void Update ()
 	{
 		// If game is running (status)
 		if (status == "running") {
 
-			// Get current players 
-			GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
+			// Alive players
 			GameObject alivePlayer = null;
 			int alivePlayersCount = 0;
 
@@ -36,7 +41,7 @@ public class GameManager : MonoBehaviour
 				}
 			}
 
-			// Less than 2 players remaining
+			// Less than 2 players remaining (stop game)
 			if (alivePlayersCount < 2) {
 
 				// Set status to menu
@@ -47,15 +52,18 @@ public class GameManager : MonoBehaviour
 				playersUI.SetActive (true);
 				shopUI.SetActive (true);
 
+				// Stop all players and mark as not ready
+				foreach (GameObject player in players) {
+					player.GetComponent<PlayerController> ().isReady = false;
+					player.GetComponent<PlayerController> ().stop = true;
+				}
+
 				// Game has a winner
 				if (alivePlayer) {
 
 					// Show winner by name and color
-					winnerText.text = alivePlayer.name + " Wins!";
+					winnerText.text = alivePlayer.GetComponent<PlayerController> ().playerName + " Wins!";
 					winnerText.color = alivePlayer.GetComponent<SpriteRenderer> ().material.color;
-
-					// Stop winner
-					alivePlayer.GetComponent<PlayerController> ().stop = true;
 				}
 
 				// Draw
@@ -67,45 +75,12 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void StartGame ()
+	public void startGame ()
 	{
 		// Only show players UI
-		menuUI.SetActive (false);
 		playersUI.SetActive (true);
-		shopUI.SetActive (false);
-
-		// Find all players
-		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-
-		// Destroy them
-		foreach (GameObject player in players) {
-			Destroy (player);
-		}
-
-		// Find all spawn points
-		GameObject[] spawns = GameObject.FindGameObjectsWithTag ("Respawn");
-
-		// Spawn all
-		foreach (GameObject spawn in spawns) {
-			spawn.GetComponent<PlayerSpawn> ().SpawnPlayer ();
-		}
-
-		// Update status to running
-		status = "running";
-	}
-
-	public void ContinueGame ()
-	{
-		// Only show players UI
 		menuUI.SetActive (false);
-		playersUI.SetActive (true);
 		shopUI.SetActive (false);
-
-		// Find all players
-		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
-
-		// Update status to running
-		status = "running";
 
 		// Start em
 		foreach (GameObject player in players) {
@@ -115,6 +90,31 @@ public class GameManager : MonoBehaviour
 			playerHitpointController.isDead = false;
 			// Start moving
 			player.GetComponent<PlayerController> ().stop = false;
+		}
+
+		// Update status to running
+		status = "running";
+	}
+
+	public void readyPlayer (PlayerController playerController)
+	{
+		// Set player to ready
+		playerController.isReady = true;
+
+		// Count ready players
+		int readyPlayers = 0;
+
+		// Start game if all ready
+		foreach (GameObject player in players) {
+			// Increase ready players counter
+			if (player.GetComponent<PlayerController> ().isReady) {
+				readyPlayers++;
+			}
+		}
+
+		// If all players are ready, start
+		if (readyPlayers == players.Length) {
+			startGame ();
 		}
 	}
 }
