@@ -26,8 +26,8 @@ public class UpgradeController : MonoBehaviour
 
 	public bool upgrade (Upgrade upgrade)
 	{
-		// Is able to stock more
-		if (upgrade.stock == stocks [upgrade]) {
+		// Able to upgrade
+		if (!isAbleToUpgrade (upgrade)) {
 			return false;
 		}
 
@@ -71,7 +71,23 @@ public class UpgradeController : MonoBehaviour
 		return false;
 	}
 
-	public bool payment (Upgrade upgrade)
+	public bool isAbleToUpgrade (Upgrade upgrade)
+	{
+		// Is able to stock more
+		if (upgrade.stock == stocks [upgrade]) {
+			return false;
+		}
+
+		// Has enough money to pay
+		if (!payment (upgrade, false)) {
+			return false;
+		}
+
+		// Able to upgrade
+		return true;
+	}
+
+	public bool payment (Upgrade upgrade, bool pay = true)
 	{
 		// Paying in diamonds
 		if (upgrade.priceType.type == "Diamond") {
@@ -82,8 +98,10 @@ public class UpgradeController : MonoBehaviour
 			}
 
 			// Pay and update UI
-			player.diamonds -= upgrade.price;
-			player.updateResources ();
+			if (pay) {
+				player.diamonds -= upgrade.price;
+				player.updateResources ();
+			}
 
 			// Payment successful
 			return true;
@@ -98,8 +116,10 @@ public class UpgradeController : MonoBehaviour
 			}
 
 			// Pay and update UI
-			player.stars -= upgrade.price;
-			player.updateResources ();
+			if (pay) {
+				player.stars -= upgrade.price;
+				player.updateResources ();
+			}
 
 			// Payment successful
 			return true;
