@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	private string status = "menu";
+	public string gameStatus = "menu";
+	public string gameMode;
 
 	public GameObject menuUI;
 	public GameObject playersUI;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
 	public Text winnerText;
 
 	private GameObject[] players;
+
+	public GameObject alertText;
 
 	void Start ()
 	{
@@ -24,7 +27,7 @@ public class GameManager : MonoBehaviour
 	void Update ()
 	{
 		// If game is running (status)
-		if (status == "running") {
+		if (gameStatus == "running") {
 
 			// Alive players
 			GameObject alivePlayer = null;
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
 			if (alivePlayersCount < 2) {
 
 				// Set status to menu
-				status = "shop";
+				gameStatus = "shop";
 
 				// Show shop menu
 				menuUI.SetActive (false);
@@ -75,8 +78,23 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void startGame ()
+	public void startGame (string mode = "2players")
 	{
+		// Set game mode
+		gameMode = mode;
+
+		// Online mode
+		if (mode == "online") {
+			alert ("Playing online feature is coming soon!");
+			return;
+		}
+
+		// Vs bot
+		if (mode == "vsbot") {
+			alert ("Playing vs bot feature is coming soon!");
+			return;
+		}
+
 		// Only show players UI
 		playersUI.SetActive (true);
 		menuUI.SetActive (false);
@@ -93,7 +111,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Update status to running
-		status = "running";
+		gameStatus = "running";
 	}
 
 	public void readyPlayer (PlayerController playerController)
@@ -116,5 +134,15 @@ public class GameManager : MonoBehaviour
 		if (readyPlayers == players.Length) {
 			startGame ();
 		}
+	}
+
+	public void alert (string message)
+	{
+		// Create the object
+		GameObject textGameObject = Instantiate (alertText);
+		textGameObject.transform.SetParent (GameObject.Find ("Canvas/Global/Alerts").transform, false);
+
+		// Set message
+		textGameObject.GetComponent<Text> ().text = message;
 	}
 }
