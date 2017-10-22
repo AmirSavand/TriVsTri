@@ -2710,12 +2710,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
     type: 2}
   m_PrefabInternal: {fileID: 1640953739}
---- !u!114 &969605324 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
-    type: 2}
-  m_PrefabInternal: {fileID: 1640953739}
-  m_Script: {fileID: 11500000, guid: 67e00e750d44655468a9319e51ca2b03, type: 3}
 --- !u!1 &983881357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,12 +2776,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
     type: 2}
   m_PrefabInternal: {fileID: 2001571547}
---- !u!114 &996424787 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
-    type: 2}
-  m_PrefabInternal: {fileID: 2001571547}
-  m_Script: {fileID: 11500000, guid: 67e00e750d44655468a9319e51ca2b03, type: 3}
 --- !u!1 &1031579387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4105,11 +4093,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4412436546826032, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2.500001
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4412436546826032, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
       propertyPath: m_LocalScale.y
-      value: 2.500001
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4412436546826032, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4120,46 +4108,21 @@ Prefab:
       propertyPath: fireKey
       value: Fire2
       objectReference: {fileID: 0}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: moveSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 212606654521649498, guid: b250280879ae0a04aa2311fbf397ca58,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 421e6cb3095176e4ca99f63024eeb9f9, type: 2}
-    - target: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: UI
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
         type: 2}
       propertyPath: UI
       value: 
       objectReference: {fileID: 1611890160}
-    - target: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: isDead
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: stop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
         type: 2}
       propertyPath: playerName
       value: Red Player
       objectReference: {fileID: 0}
-    - target: {fileID: 114201465348001660, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: hitpointController
-      value: 
-      objectReference: {fileID: 969605324}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
   m_IsPrefabParent: 0
@@ -5367,40 +5330,10 @@ Prefab:
       propertyPath: m_Name
       value: Player (R)
       objectReference: {fileID: 0}
-    - target: {fileID: 114581438554676196, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: isDead
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: stop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
         type: 2}
       propertyPath: playerName
       value: Blue Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: moveSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114201465348001660, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: hitpointController
-      value: 
-      objectReference: {fileID: 996424787}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: stars
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648915921701190, guid: b250280879ae0a04aa2311fbf397ca58,
-        type: 2}
-      propertyPath: fireRate
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b250280879ae0a04aa2311fbf397ca58, type: 2}
