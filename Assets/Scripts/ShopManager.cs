@@ -22,6 +22,9 @@ public class ShopManager : MonoBehaviour
 		playerUpgradeController = player.GetComponent<UpgradeController> ();
 		gameManager = GameObject.Find ("Game").GetComponent<GameManager> ();
 
+		// Assign this shop to player
+		playerController.shopManager = GetComponent<ShopManager> ();
+
 		// Get upgrades
 		upgrades = GameObject.Find ("Data").GetComponentsInChildren<Upgrade> ();
 
@@ -35,8 +38,9 @@ public class ShopManager : MonoBehaviour
 			GameObject buttonGameObject = Instantiate (panelButton);
 			Button button = buttonGameObject.GetComponent<Button> ();
 
-			// Attach to panel
+			// Attach to panel and set name
 			buttonGameObject.transform.SetParent (transform);
+			buttonGameObject.name = upgrade.title;
 
 			// Set texts
 			buttonGameObject.GetComponentsInChildren<Text> () [0].text = "+" + Mathf.Abs (upgrade.amount);
@@ -48,23 +52,34 @@ public class ShopManager : MonoBehaviour
 
 			// On click
 			button.onClick.AddListener (() => upgradeClick (upgrade, button));
-
-			// Can upgrade
-			button.interactable = playerUpgradeController.isAbleToUpgrade (upgrade);
 		}
 
 		// Create ready button
 		readyButton = Instantiate (GameObject.Find ("Ready Button").GetComponent<Button> ()) as Button;
-
-		// Get ready button
 		readyButton.transform.SetParent (transform);
+		readyButton.onClick.AddListener (readyPlayer);
 	}
 
 	void OnEnable ()
 	{
-		// Interactiable
+		// Interactiable ready button
 		readyButton.interactable = true;
-		readyButton.onClick.AddListener (readyPlayer);
+
+		// Update upgrade buttons status
+		updateUpgradeButtonStatus ();
+	}
+
+	public void updateUpgradeButtonStatus ()
+	{
+		// All upgrades
+		foreach (Upgrade upgrade in upgrades) {
+
+			// Get the upgrade button
+			Button button = transform.Find (upgrade.title).GetComponent<Button> ();
+
+			// Update interactable status
+			button.interactable = playerUpgradeController.isAbleToUpgrade (upgrade);
+		}
 	}
 
 	void upgradeClick (Upgrade upgrade, Button button)
@@ -72,8 +87,8 @@ public class ShopManager : MonoBehaviour
 		// Upgrade and result in being interactable
 		playerUpgradeController.upgrade (upgrade);
 
-		// Is able to upgrade furthur
-		button.interactable = playerUpgradeController.isAbleToUpgrade (upgrade);
+		// Update status
+		updateUpgradeButtonStatus ();
 	}
 
 	public void readyPlayer ()

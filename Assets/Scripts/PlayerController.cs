@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 	public string playerName = "Player";
 	public string fireKey = "Fire1";
 	public bool isReady = true;
-	public GameObject UI;
+	public GameObject playerUI;
+	public ShopManager shopManager;
 
 	public int stars = 1;
 	public int diamonds = 1;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
 		hitpointController = GetComponent<HitpointController> ();
 
 		// Assign variables
-		hitpointController.UI = UI;
+		hitpointController.UI = playerUI;
 
 		// Initial UI
 		updateResources ();
@@ -59,14 +60,13 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+		if (hitpointController.isDead) {
+			return;
+		}
+
 		// Reverse moving if hit bullets/edges
 		if (other.CompareTag ("Bullet") || other.CompareTag ("Edge")) {
 			moveSpeed *= -1f;
-		}
-
-		// Don't collect if dead
-		if (hitpointController.isDead) {
-			return;
 		}
 
 		// Collect if hit item
@@ -140,7 +140,12 @@ public class PlayerController : MonoBehaviour
 	public void updateResources ()
 	{
 		// Update resources
-		UI.transform.Find ("Diamonds").GetComponentInChildren<Text> ().text = "" + diamonds;
-		UI.transform.Find ("Stars").GetComponentInChildren<Text> ().text = "" + stars;
+		playerUI.transform.Find ("Diamonds").GetComponentInChildren<Text> ().text = "" + diamonds;
+		playerUI.transform.Find ("Stars").GetComponentInChildren<Text> ().text = "" + stars;
+
+		// Update shop button status
+		if (shopManager) {
+			shopManager.updateUpgradeButtonStatus ();
+		}
 	}
 }
