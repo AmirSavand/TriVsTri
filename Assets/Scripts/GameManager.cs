@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 1f;
 
 		// Reload scene (restore)
-		Application.LoadLevel (0);
+		SceneManager.LoadScene ("Main");
 	}
 
 	public void alert (string message)

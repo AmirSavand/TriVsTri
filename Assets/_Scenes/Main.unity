@@ -162,6 +162,7 @@ MonoBehaviour:
   items:
   - {fileID: 1898888819907496, guid: db5f3d1e3f06bdc4fb90b0f08d7d0add, type: 2}
   - {fileID: 1431513522190434, guid: fd7ed26f5389efb45afc88b8b5633c7d, type: 2}
+  - {fileID: 1239826334700572, guid: 581391fda055f5f45a3d3eae3dd0f4f1, type: 2}
 --- !u!4 &139060945
 Transform:
   m_ObjectHideFlags: 0
@@ -204,17 +205,6 @@ Transform:
   m_Father: {fileID: 37685192}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &710442174 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1741301072816266, guid: 038039a18459ea1478dd457f555b072a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1525076303}
---- !u!222 &710442175
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 710442174}
 --- !u!1 &969605323 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1198655878764546, guid: b250280879ae0a04aa2311fbf397ca58,
@@ -506,25 +496,13 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -539.7783
       objectReference: {fileID: 0}
-    - target: {fileID: 114184799570444282, guid: 038039a18459ea1478dd457f555b072a,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: exitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 114184799570444282, guid: 038039a18459ea1478dd457f555b072a,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+    - target: {fileID: 1741301072816266, guid: 038039a18459ea1478dd457f555b072a, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114236467095201724, guid: 038039a18459ea1478dd457f555b072a,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: resumeGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 114236467095201724, guid: 038039a18459ea1478dd457f555b072a,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+    - target: {fileID: 1441210747568952, guid: 038039a18459ea1478dd457f555b072a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 038039a18459ea1478dd457f555b072a, type: 2}
