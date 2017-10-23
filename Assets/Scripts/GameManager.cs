@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public GameObject menuUI;
 	public GameObject playersUI;
 	public GameObject shopUI;
+	public GameObject pauseUI;
 
 	public Text winnerText;
 
@@ -76,7 +77,30 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
+
+		// Press pause button
+		if (Input.GetButtonUp ("Cancel")) {
+			
+			// If game is running
+			if (gameStatus == "running") {
+			
+				// Set mode to paused
+				gameStatus = "pause";
+			
+				// Pause time/game
+				Time.timeScale = 0;
+
+				// Show pause menu
+				pauseUI.SetActive (true);
+			}
+
+			// If game is paused
+			else if (gameStatus == "pause") {
+				resumeGame ();
+			}
+		}
 	}
+
 
 	public void startGame (string mode = "2players")
 	{
@@ -134,6 +158,27 @@ public class GameManager : MonoBehaviour
 		if (readyPlayers == players.Length) {
 			startGame ();
 		}
+	}
+
+	public void resumeGame ()
+	{
+		// Restore time scale
+		Time.timeScale = 1f;
+
+		// Hide pause menu
+		pauseUI.SetActive (false);
+
+		// Update status
+		gameStatus = "running";
+	}
+
+	public void exitGame ()
+	{
+		// Restore time scale
+		Time.timeScale = 1f;
+
+		// Reload scene (restore)
+		Application.LoadLevel (0);
 	}
 
 	public void alert (string message)
