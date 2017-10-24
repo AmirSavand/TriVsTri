@@ -1552,6 +1552,7 @@ MonoBehaviour:
   price: 10
   priceType: {fileID: 114337818270133206}
   stock: 10
+  stockFactor: 15
 --- !u!114 &114025802655728120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2675,6 +2676,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 18
+  stockFactor: 25
 --- !u!114 &114431065200189946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2948,6 +2950,7 @@ MonoBehaviour:
   price: 10
   priceType: {fileID: 114337818270133206}
   stock: 3
+  stockFactor: 20
 --- !u!114 &114606612144877462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2964,6 +2967,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 40
+  stockFactor: 25
 --- !u!114 &114612101623217004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3786,6 +3790,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 10
+  stockFactor: 25
 --- !u!114 &114991715775043762
 MonoBehaviour:
   m_ObjectHideFlags: 1

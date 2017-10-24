@@ -13,4 +13,11 @@ public class Upgrade : MonoBehaviour
 	public Item priceType;
 
 	public int stock;
+
+	public int stockFactor = 25;
+
+	public int getPrice (int playerStock)
+	{
+		return (int)(price + (playerStock * stockFactor));
+	}
 }

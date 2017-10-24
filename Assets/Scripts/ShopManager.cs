@@ -79,6 +79,9 @@ public class ShopManager : MonoBehaviour
 
 			// Update interactable status
 			button.interactable = playerUpgradeController.isAbleToUpgrade (upgrade);
+
+			// Update price
+			button.transform.Find ("Price").GetComponent<Text> ().text = "" + upgrade.getPrice (playerUpgradeController.stocks [upgrade]);
 		}
 	}
 
