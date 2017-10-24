@@ -32,7 +32,9 @@ public class DamageController : MonoBehaviour
 			hitpointController.damage (damage, issuer);
 
 			// Self distruct (if target is not dead)
-			Destroy (gameObject);
+			if (hitpointController.takeBullet) {
+				Destroy (gameObject);
+			}
 		}
 	}
 

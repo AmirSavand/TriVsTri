@@ -10,6 +10,7 @@ public class HitpointController : MonoBehaviour
 
 	public bool destroyAfterDeath = true;
 	public bool isDead = false;
+	public bool takeBullet = true;
 
 	public AudioSource hitSound;
 	public AudioSource deadSound;

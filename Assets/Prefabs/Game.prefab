@@ -3357,8 +3357,8 @@ MonoBehaviour:
   playersUI: {fileID: 1107997654593452}
   shopUI: {fileID: 1441210747568952}
   pauseUI: {fileID: 1749247627048006}
-  winnerText: {fileID: 114472707149338232}
   alertText: {fileID: 1892586237414446}
+  winnerText: {fileID: 114472707149338232}
 --- !u!114 &114831620155831358
 MonoBehaviour:
   m_ObjectHideFlags: 1

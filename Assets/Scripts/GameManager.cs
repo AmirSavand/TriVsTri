@@ -13,12 +13,11 @@ public class GameManager : MonoBehaviour
 	public GameObject playersUI;
 	public GameObject shopUI;
 	public GameObject pauseUI;
+	public GameObject alertText;
 
 	public Text winnerText;
 
 	private GameObject[] players;
-
-	public GameObject alertText;
 
 	void Start ()
 	{
@@ -37,10 +36,13 @@ public class GameManager : MonoBehaviour
 
 			// Count remaining players
 			foreach (GameObject player in players) {
+				
 				// If alive
 				if (!player.GetComponent<HitpointController> ().isDead) {
+					
 					// Increase count
 					alivePlayersCount++;
+
 					// Store player
 					alivePlayer = player;
 				}
@@ -127,10 +129,12 @@ public class GameManager : MonoBehaviour
 
 		// Start em
 		foreach (GameObject player in players) {
+			
 			// Make alive
 			HitpointController playerHitpointController = player.GetComponent<HitpointController> ();
 			playerHitpointController.heal ();
 			playerHitpointController.isDead = false;
+
 			// Start moving
 			player.GetComponent<PlayerController> ().stop = false;
 		}
