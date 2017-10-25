@@ -64,9 +64,17 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 
-		// Reverse moving if hit bullets/edges
-		if (other.CompareTag ("Bullet") || other.CompareTag ("Edge")) {
+		// Reverse moving if hit bullets
+		if (other.CompareTag ("Bullet")) {
 			moveSpeed *= -1f;
+		}
+
+		// Get edge
+		EdgeController edgeController = other.GetComponent<EdgeController> ();
+
+		// If hit edge with edge controller
+		if (other.CompareTag ("Edge") && edgeController) {
+			moveSpeed = edgeController.changeSpeed (moveSpeed);
 		}
 
 		// Collect if hit item
