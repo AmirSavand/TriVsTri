@@ -155,6 +155,6 @@ public class HitpointController : MonoBehaviour
 		}
 
 		// Update value
-		UI.transform.Find ("Hitpoint Slider").GetComponent<Slider> ().value = hitpoints / maxHitpoints * 100;
+		UI.transform.Find ("Hitpoints/Slider").GetComponent<Slider> ().value = hitpoints / maxHitpoints * 100;
 	}
 }

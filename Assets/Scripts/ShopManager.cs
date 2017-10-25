@@ -39,7 +39,7 @@ public class ShopManager : MonoBehaviour
 			Button button = buttonGameObject.GetComponent<Button> ();
 
 			// Attach to panel and set name
-			buttonGameObject.transform.SetParent (transform);
+			buttonGameObject.transform.SetParent (transform, false);
 			buttonGameObject.name = upgrade.title;
 
 			// Set texts
@@ -56,7 +56,7 @@ public class ShopManager : MonoBehaviour
 
 		// Create ready button
 		readyButton = Instantiate (GameObject.Find ("Ready Button").GetComponent<Button> ()) as Button;
-		readyButton.transform.SetParent (transform);
+		readyButton.transform.SetParent (transform, false);
 		readyButton.onClick.AddListener (readyPlayer);
 	}
 

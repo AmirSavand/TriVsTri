@@ -18,6 +18,7 @@ public class Upgrade : MonoBehaviour
 
 	public int getPrice (int playerStock)
 	{
+		// Increase price based on stock and factor
 		return (int)(price + (playerStock * stockFactor));
 	}
 }
