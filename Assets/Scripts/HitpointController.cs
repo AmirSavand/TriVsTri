@@ -81,7 +81,7 @@ public class HitpointController : MonoBehaviour
 			}
 
 			// If has item drop
-			if (deathItemCount > 0) {
+			if (deathItemCount > 0 && issuer != gameObject) {
 				
 				// As much as item count
 				for (int i = 0; i < deathItemCount; i++) {
