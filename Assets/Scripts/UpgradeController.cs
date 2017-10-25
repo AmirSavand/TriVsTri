@@ -89,17 +89,20 @@ public class UpgradeController : MonoBehaviour
 
 	public bool payment (Upgrade upgrade, bool pay = true)
 	{
+		// Price
+		int price = upgrade.getPrice (stocks [upgrade]);
+
 		// Paying in diamonds
 		if (upgrade.priceType.type == "Diamond") {
 
 			// Has enough resource
-			if (player.diamonds < upgrade.price) {
+			if (player.diamonds < price) {
 				return false;
 			}
 
 			// Pay and update UI
 			if (pay) {
-				player.diamonds -= upgrade.price;
+				player.diamonds -= price;
 				player.updateResources ();
 			}
 
@@ -111,13 +114,13 @@ public class UpgradeController : MonoBehaviour
 		if (upgrade.priceType.type == "Star") {
 
 			// Has enough resource
-			if (player.stars < upgrade.price) {
+			if (player.stars < price) {
 				return false;
 			}
 
 			// Pay and update UI
 			if (pay) {
-				player.stars -= upgrade.price;
+				player.stars -= price;
 				player.updateResources ();
 			}
 
