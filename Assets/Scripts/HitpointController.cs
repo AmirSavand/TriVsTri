@@ -135,11 +135,10 @@ public class HitpointController : MonoBehaviour
 		if (amount == -1f) {
 			amount = maxHitpoints;
 		}
-
 		// Otherwize heal by amount
 		else {
 			// Set min and max amount of healing
-			amount = Mathf.Clamp (amount, 1f, maxHitpoints);
+			amount = Mathf.Clamp (hitpoints += amount, 1f, maxHitpoints);
 		}
 
 		// Heal and update UI

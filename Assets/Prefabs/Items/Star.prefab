@@ -221,6 +221,7 @@ MonoBehaviour:
   hitpoints: 0
   destroyAfterDeath: 1
   isDead: 0
+  takeBullet: 1
   hitSound: {fileID: 82532420386954672}
   deadSound: {fileID: 82532420386954672}
   UI: {fileID: 0}

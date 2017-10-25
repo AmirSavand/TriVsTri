@@ -91,6 +91,10 @@ public class PlayerController : MonoBehaviour
 				diamonds += item.amount;
 			}
 
+			if (item.type == "Hitpoint") {
+				hitpointController.heal (item.amount);
+			}
+
 			// Update UI
 			updateResources ();
 
