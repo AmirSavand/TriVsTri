@@ -71,6 +71,9 @@ public class GameManager : MonoBehaviour
 					// Show winner by name and color
 					winnerText.text = alivePlayer.GetComponent<PlayerController> ().playerName + " Wins!";
 					winnerText.color = alivePlayer.GetComponent<SpriteRenderer> ().material.color;
+
+					// Add score to winner
+					alivePlayer.GetComponent<PlayerController> ().score += 1;
 				}
 
 				// Draw

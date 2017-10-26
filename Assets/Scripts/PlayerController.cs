@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
 	public string playerName = "Player";
 	public string fireKey = "Fire1";
 	public bool isReady = true;
+
 	public GameObject playerUI;
 	public ShopManager shopManager;
 
+	public int score = 0;
 	public int stars = 1;
 	public int diamonds = 1;
 
