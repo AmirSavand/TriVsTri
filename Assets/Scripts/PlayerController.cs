@@ -58,6 +58,17 @@ public class PlayerController : MonoBehaviour
 
 	}
 
+	void OnTriggerStay2D (Collider2D other)
+	{
+		// Get edge
+		EdgeController edgeController = other.GetComponent<EdgeController> ();
+
+		// If hit edge with edge controller
+		if (other.CompareTag ("Edge") && edgeController) {
+			moveSpeed = edgeController.changeSpeed (moveSpeed);
+		}
+	}
+
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (hitpointController.isDead) {
