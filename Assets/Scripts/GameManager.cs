@@ -6,17 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	// Game
 	public string gameStatus = "menu";
 	public string gameMode;
+	public float gameTimer = 0f;
 
+	// Defaults
+	public float startingTime = 180f;
+
+	// UI objects
 	public GameObject menuUI;
 	public GameObject playersUI;
 	public GameObject shopUI;
 	public GameObject pauseUI;
+	public GameObject timerUI;
+	public GameObject finishUI;
+
+	// Alert
 	public GameObject alertText;
 
+	// Winner
 	public Text winnerText;
 
+	// Players
 	private GameObject[] players;
 
 	void Start ()
@@ -29,6 +41,56 @@ public class GameManager : MonoBehaviour
 	{
 		// If game is running (status)
 		if (gameStatus == "running") {
+
+			// Check timer and reduce it over time
+			if (gameTimer >= 0f) {
+			
+				// Reduce timer
+				gameTimer -= Time.deltaTime;
+
+				// Update timer UI
+				timerUI.GetComponentInChildren<Text> ().text = "" + (int)gameTimer;
+			}
+
+			// Timer reached 0
+			else {
+
+				// Stop game
+				gameStatus = "finish";
+
+				// Show finish UI
+				menuUI.SetActive (false);
+				playersUI.SetActive (false);
+				shopUI.SetActive (false);
+				finishUI.SetActive (true);
+
+				// Top score
+				int topScore = 0;
+				PlayerController topPlayer = null;
+
+				// Find winner
+				foreach (GameObject player in players) {
+
+					// Player controller
+					PlayerController playerController = player.GetComponent<PlayerController> ();
+
+					// If higher score than other player
+					if (playerController.score >= topScore) {
+					
+						// Save top
+						topScore = playerController.score;
+						topPlayer = playerController;
+					}
+
+					// Stop player
+					playerController.stop = true;
+					playerController.isReady = false;
+				}
+
+				// Set winner
+				finishUI.GetComponentInChildren<Text> ().text = topPlayer.playerName + " Won!";
+				finishUI.GetComponentInChildren<Text> ().color = topPlayer.GetComponent<SpriteRenderer> ().material.color;
+			}
 
 			// Alive players
 			GameObject alivePlayer = null;
@@ -107,7 +169,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-
 	public void startGame (string mode = "2players")
 	{
 		// Set game mode
@@ -142,7 +203,12 @@ public class GameManager : MonoBehaviour
 			player.GetComponent<PlayerController> ().stop = false;
 		}
 
-		// Update status to running
+		// Reset timer if starting game from menu
+		if (gameStatus == "menu") {
+			gameTimer = startingTime;
+		}
+
+		// Game is running
 		gameStatus = "running";
 	}
 
@@ -164,7 +230,7 @@ public class GameManager : MonoBehaviour
 
 		// If all players are ready, start
 		if (readyPlayers == players.Length) {
-			startGame ();
+			startGame (gameMode);
 		}
 	}
 
