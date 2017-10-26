@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
 
 	public GameManager gameManager;
 
-	public Button readyButton;
+	public PlayerReadyController readyButtonController;
 
 	public Upgrade[] upgrades;
 
@@ -54,17 +54,14 @@ public class ShopManager : MonoBehaviour
 			button.onClick.AddListener (() => upgradeClick (upgrade, button));
 		}
 
-		// Create ready button
-		readyButton = Instantiate (GameObject.Find ("Ready Button").GetComponent<Button> ()) as Button;
-		readyButton.transform.SetParent (transform, false);
-		readyButton.onClick.AddListener (readyPlayer);
+		// Create ready button and assign player to it
+		readyButtonController = Instantiate (GameObject.Find ("Ready Button").GetComponent<PlayerReadyController> ()) as PlayerReadyController;
+		readyButtonController.transform.SetParent (transform, false);
+		readyButtonController.player = player.GetComponent<PlayerController> ();
 	}
 
 	void OnEnable ()
 	{
-		// Interactiable ready button
-		readyButton.interactable = true;
-
 		// Update upgrade buttons status
 		updateUpgradeButtonStatus ();
 	}
@@ -92,17 +89,5 @@ public class ShopManager : MonoBehaviour
 
 		// Update status
 		updateUpgradeButtonStatus ();
-	}
-
-	public void readyPlayer ()
-	{
-		// Make player reaedy
-		playerController.isReady = true;
-
-		// Call it
-		gameManager.readyPlayer (playerController);
-
-		// Disable ready button
-		readyButton.interactable = false;
 	}
 }

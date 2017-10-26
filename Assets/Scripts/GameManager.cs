@@ -29,13 +29,7 @@ public class GameManager : MonoBehaviour
 	public Text winnerText;
 
 	// Players
-	private GameObject[] players;
-
-	void Start ()
-	{
-		// Get players
-		players = GameObject.FindGameObjectsWithTag ("Player");
-	}
+	public PlayerController[] players;
 
 	void Update ()
 	{
@@ -43,7 +37,7 @@ public class GameManager : MonoBehaviour
 		if (gameStatus == "running") {
 
 			// Check timer and reduce it over time
-			if (gameTimer >= 0f) {
+			if (gameTimer > 0f) {
 			
 				// Reduce timer
 				gameTimer -= Time.deltaTime;
@@ -52,16 +46,14 @@ public class GameManager : MonoBehaviour
 				timerUI.GetComponentInChildren<Text> ().text = "" + (int)gameTimer;
 			}
 
-			// Timer reached 0
+			// Timers time's up
 			else {
 
 				// Stop game
 				gameStatus = "finish";
 
 				// Show finish UI
-				menuUI.SetActive (false);
 				playersUI.SetActive (false);
-				shopUI.SetActive (false);
 				finishUI.SetActive (true);
 
 				// Top score
@@ -69,23 +61,19 @@ public class GameManager : MonoBehaviour
 				PlayerController topPlayer = null;
 
 				// Find winner
-				foreach (GameObject player in players) {
-
-					// Player controller
-					PlayerController playerController = player.GetComponent<PlayerController> ();
+				foreach (PlayerController player in players) {
 
 					// If higher score than other player
-					if (playerController.score >= topScore) {
+					if (player.score >= topScore) {
 					
 						// Save top
-						topScore = playerController.score;
-						topPlayer = playerController;
+						topScore = player.score;
+						topPlayer = player;
 					}
-
-					// Stop player
-					playerController.stop = true;
-					playerController.isReady = false;
 				}
+
+				// Stop all players
+				startPlayers (false);
 
 				// Set winner
 				finishUI.GetComponentInChildren<Text> ().text = topPlayer.playerName + " Won!";
@@ -93,11 +81,11 @@ public class GameManager : MonoBehaviour
 			}
 
 			// Alive players
-			GameObject alivePlayer = null;
+			PlayerController alivePlayer = null;
 			int alivePlayersCount = 0;
 
-			// Count remaining players
-			foreach (GameObject player in players) {
+			// Count alive players
+			foreach (PlayerController player in players) {
 				
 				// If alive
 				if (!player.GetComponent<HitpointController> ().isDead) {
@@ -117,14 +105,13 @@ public class GameManager : MonoBehaviour
 				gameStatus = "shop";
 
 				// Show shop menu
-				menuUI.SetActive (false);
 				playersUI.SetActive (true);
 				shopUI.SetActive (true);
 
 				// Stop all players and mark as not ready
-				foreach (GameObject player in players) {
-					player.GetComponent<PlayerController> ().isReady = false;
-					player.GetComponent<PlayerController> ().stop = true;
+				foreach (PlayerController player in players) {
+					player.isReady = false;
+					player.stop = true;
 				}
 
 				// Game has a winner
@@ -140,9 +127,31 @@ public class GameManager : MonoBehaviour
 
 				// Draw
 				else {
+
+					// Update text and color
 					winnerText.text = "Draw!";
 					winnerText.color = new Color32 (0x66, 0x66, 0x66, 0xFF);
 				}
+			}
+		}
+
+		// If game is in shop/finish
+		if (gameStatus == "shop" || gameStatus == "finish") {
+
+			// All players are ready
+			if (getReadyPlayers ().Count == players.Length) {
+			
+				// Hide shop/finish
+				playersUI.SetActive (true);
+				shopUI.SetActive (false);
+				finishUI.SetActive (false);
+
+				// Update game
+				gameStatus = "running";
+				gameTimer = startingTime;
+
+				// Start em
+				startPlayers (true, true);
 			}
 		}
 
@@ -192,46 +201,15 @@ public class GameManager : MonoBehaviour
 		shopUI.SetActive (false);
 
 		// Start em
-		foreach (GameObject player in players) {
-			
-			// Make alive
-			HitpointController playerHitpointController = player.GetComponent<HitpointController> ();
-			playerHitpointController.heal ();
-			playerHitpointController.isDead = false;
+		startPlayers (true, true);
 
-			// Start moving
-			player.GetComponent<PlayerController> ().stop = false;
-		}
-
-		// Reset timer if starting game from menu
-		if (gameStatus == "menu") {
+		// Reset timer if starting game from menu or continuing from finish
+		if (gameStatus == "menu" || gameStatus == "finish") {
 			gameTimer = startingTime;
 		}
 
 		// Game is running
 		gameStatus = "running";
-	}
-
-	public void readyPlayer (PlayerController playerController)
-	{
-		// Set player to ready
-		playerController.isReady = true;
-
-		// Count ready players
-		int readyPlayers = 0;
-
-		// Start game if all ready
-		foreach (GameObject player in players) {
-			// Increase ready players counter
-			if (player.GetComponent<PlayerController> ().isReady) {
-				readyPlayers++;
-			}
-		}
-
-		// If all players are ready, start
-		if (readyPlayers == players.Length) {
-			startGame (gameMode);
-		}
 	}
 
 	public void resumeGame ()
@@ -263,5 +241,49 @@ public class GameManager : MonoBehaviour
 
 		// Set message
 		textGameObject.GetComponent<Text> ().text = message;
+	}
+
+	public void startPlayers (bool start = true, bool death = false)
+	{
+		// All players
+		foreach (PlayerController player in players) {
+
+			// Get HP controller
+			HitpointController hitpointController = player.GetComponent<HitpointController> ();
+
+			// Heal (if start)
+			if (start) {
+				hitpointController.heal ();
+			}
+
+			// Update death status (if death)
+			if (death) {
+				hitpointController.isDead = !start;
+			}
+
+			// Update status
+			player.stop = !start;
+			player.isReady = start;
+		}
+	}
+
+	public List<PlayerController> getReadyPlayers ()
+	{
+		// Ready players
+		List<PlayerController> readyPlayers = new List<PlayerController> ();
+	
+		// For all players
+		foreach (PlayerController player in players) {
+
+			// Is ready
+			if (player.isReady) {
+			
+				// Add to list
+				readyPlayers.Add (player);
+			}
+		}
+
+		// Return ready players list
+		return readyPlayers;
 	}
 }

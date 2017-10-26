@@ -392,6 +392,7 @@ MonoBehaviour:
   hitpoints: 0
   destroyAfterDeath: 0
   isDead: 0
+  takeBullet: 1
   hitSound: {fileID: 82390026577553974}
   deadSound: {fileID: 82404441169744768}
   UI: {fileID: 0}
@@ -413,7 +414,9 @@ MonoBehaviour:
   playerName: Player
   fireKey: Fire1
   isReady: 0
-  UI: {fileID: 0}
+  playerUI: {fileID: 0}
+  shopManager: {fileID: 0}
+  score: 0
   stars: 0
   diamonds: 0
   moveSpeed: 15
