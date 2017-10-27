@@ -1,23 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DamageController : MonoBehaviour
+public class DamageController : NetworkBehaviour
 {
 	public float damage = 20f;
 
+	private float age = 0f;
+	public float maxLifeTime = 10f;
+
 	public GameObject issuer;
 
-	void Start ()
-	{
-		// Destroy bullet in case of not hitting any edge
-		Destroy (gameObject, 10f);
-	}
-
+	[ServerCallback]
 	void Update ()
 	{
 		// Face where it's going
 		transform.up = GetComponent<Rigidbody2D> ().velocity;
+
+		// Destroy when reaches maxLifetime
+		age += Time.deltaTime;
+		if (age >= maxLifeTime) {
+			NetworkServer.Destroy (gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -42,7 +47,7 @@ public class DamageController : MonoBehaviour
 	{
 		// Hit inner edge
 		if (other.name == "Inner Edge") {
-			Destroy (gameObject);
+			NetworkServer.Destroy (gameObject);
 		}
 	}
 }

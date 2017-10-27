@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 212015439582479326}
   - component: {fileID: 61325117205317454}
   - component: {fileID: 50934884834532552}
-  - component: {fileID: 114506100368689854}
+  - component: {fileID: 114707206493082292}
+  - component: {fileID: 114617335426728284}
+  - component: {fileID: 114316609936826502}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -88,7 +90,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114506100368689854
+--- !u!114 &114316609936826502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -100,7 +102,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  maxLifeTime: 10
   issuer: {fileID: 0}
+--- !u!114 &114617335426728284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691644667590252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 2
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114707206493082292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691644667590252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 96
+    i1: 185
+    i2: 176
+    i3: 143
+    i4: 203
+    i5: 215
+    i6: 42
+    i7: 132
+    i8: 201
+    i9: 129
+    i10: 64
+    i11: 253
+    i12: 143
+    i13: 77
+    i14: 63
+    i15: 206
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212015439582479326
 SpriteRenderer:
   m_ObjectHideFlags: 1

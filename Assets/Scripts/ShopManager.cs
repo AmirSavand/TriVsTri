@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-	public GameObject player;
-	public PlayerController playerController;
+	public PlayerController player;
 	public UpgradeController playerUpgradeController;
 
 	public GameManager gameManager;
@@ -17,14 +16,6 @@ public class ShopManager : MonoBehaviour
 
 	void Awake ()
 	{
-		// Get components
-		playerController = player.GetComponent<PlayerController> ();
-		playerUpgradeController = player.GetComponent<UpgradeController> ();
-		gameManager = GameObject.Find ("Game").GetComponent<GameManager> ();
-
-		// Assign this shop to player
-		playerController.shopManager = GetComponent<ShopManager> ();
-
 		// Get upgrades
 		upgrades = GameObject.Find ("Data").GetComponentsInChildren<Upgrade> ();
 

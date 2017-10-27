@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
 	public string playerName = "Player";
 	public string fireKey = "Fire1";
@@ -11,6 +12,9 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject playerUI;
 	public ShopManager shopManager;
+	public GameManager gameManager;
+
+	public HitpointController hitpointController;
 
 	public int score = 0;
 	public int stars = 1;
@@ -30,15 +34,24 @@ public class PlayerController : MonoBehaviour
 
 	private float lastTimeFired;
 
-	private HitpointController hitpointController;
-
 	void Start ()
 	{
-		// Get components
-		hitpointController = GetComponent<HitpointController> ();
+		// Destroy if not local
+		if (!isLocalPlayer) {
+			Destroy (this);
+			return;
+		}
+
+		// Get spawn data
+		playerUI = getSpawnController ().playerUI;
+		shopManager = getSpawnController ().shopManager;
+		gameManager = getSpawnController ().gameManager;
 
 		// Assign variables
+		shopManager.player = this;
+		shopManager.playerUpgradeController = GetComponent<UpgradeController> ();
 		hitpointController.UI = playerUI;
+		gameManager.players.Add (this);
 
 		// Initial UI
 		updateResources ();
@@ -52,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
 		// Key detection, fire
 		if (Input.GetButton (fireKey)) {
-			fire ();
+			CmdFire ();
 		}
 
 		// Move player
@@ -116,16 +129,17 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public void fire (bool ignoreRate = false, int shotNumber = 1)
+	[Command]
+	public void CmdFire (/**bool ignoreRate = false, int shotNumber = 1**/)
 	{
 		if (hitpointController.isDead || stop) {
 			return;
 		}
 
 		// Check fire rate
-		if (!ignoreRate && Time.fixedTime - lastTimeFired < fireRate) {
-			return;
-		}
+		//if (!ignoreRate && Time.fixedTime - lastTimeFired < fireRate) {
+		//	return;
+		//}
 
 		// Save fire rate
 		lastTimeFired = Time.fixedTime;
@@ -135,10 +149,10 @@ public class PlayerController : MonoBehaviour
 		Vector3 velocity = fireTransform.up * firePower;
 
 		// Push bullets up if not initial bullet
-		if (ignoreRate) {
-			position.y += 0.5f * shotNumber;
-			velocity.y += 0.5f * shotNumber;
-		}
+		//if (ignoreRate) {
+		//	position.y += 0.5f * shotNumber;
+		//	velocity.y += 0.5f * shotNumber;
+		//}
 
 		// Create bullet
 		Rigidbody2D bulletInstance = Instantiate (bullet, position, transform.rotation) as Rigidbody2D;
@@ -154,12 +168,15 @@ public class PlayerController : MonoBehaviour
 		// Fire sound
 		fireSound.Play ();
 
+		// Spawn from server
+		NetworkServer.Spawn (bulletInstance.gameObject);
+
 		// Fire multiple shots based on weapon level
-		if (!ignoreRate) {
-			for (int i = 0; i < weaponLevel; i++) {
-				fire (true, i + 1);
-			}
-		}
+		//if (!ignoreRate) {
+		//	for (int i = 0; i < weaponLevel; i++) {
+		//		CmdFire (true, i + 1);
+		//	}
+		//}
 	}
 
 	public void updateResources ()
@@ -172,5 +189,26 @@ public class PlayerController : MonoBehaviour
 		if (shopManager) {
 			shopManager.updateUpgradeButtonStatus ();
 		}
+	}
+
+	public PlayerSpawnController getSpawnController ()
+	{
+		GameObject[] gos = GameObject.FindGameObjectsWithTag ("Respawn");
+		GameObject closest = null;
+		Vector3 position = transform.position;
+		float distance = Mathf.Infinity;
+
+		foreach (GameObject go in gos) {
+			
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+
+			if (curDistance < distance) {
+				closest = go;
+				distance = curDistance;
+			}
+		}
+
+		return closest.GetComponent<PlayerSpawnController> ();
 	}
 }

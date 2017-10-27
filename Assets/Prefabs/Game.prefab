@@ -3478,9 +3478,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerController: {fileID: 0}
   playerUpgradeController: {fileID: 0}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 114822701994919506}
   readyButtonController: {fileID: 0}
   upgrades: []
 --- !u!114 &114586949110558936
@@ -3976,9 +3975,7 @@ MonoBehaviour:
   finishUI: {fileID: 1441210747568952}
   alertText: {fileID: 1892586237414446}
   winnerText: {fileID: 114472707149338232}
-  players:
-  - {fileID: 0}
-  - {fileID: 0}
+  players: []
 --- !u!114 &114831620155831358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4334,9 +4331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerController: {fileID: 0}
   playerUpgradeController: {fileID: 0}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 114822701994919506}
   readyButtonController: {fileID: 0}
   upgrades: []
 --- !u!114 &114935515451390998

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 	public Text winnerText;
 
 	// Players
-	public PlayerController[] players;
+	public List<PlayerController> players = new List<PlayerController> ();
 
 	void Update ()
 	{
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			// Less than 2 players remaining (stop game)
+			/**
 			if (alivePlayersCount < 2) {
 
 				// Set status to menu
@@ -133,13 +134,14 @@ public class GameManager : MonoBehaviour
 					winnerText.color = new Color32 (0x66, 0x66, 0x66, 0xFF);
 				}
 			}
+			**/
 		}
 
 		// If game is in shop/finish
 		if (gameStatus == "shop" || gameStatus == "finish") {
 
 			// All players are ready
-			if (getReadyPlayers ().Count == players.Length) {
+			if (getReadyPlayers ().Count == players.Count) {
 			
 				// Hide shop/finish
 				playersUI.SetActive (true);
