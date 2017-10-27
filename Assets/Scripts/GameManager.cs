@@ -148,7 +148,11 @@ public class GameManager : MonoBehaviour
 
 				// Update game
 				gameStatus = "running";
-				gameTimer = startingTime;
+
+				// Reset timer if from finish
+				if (gameStatus == "finish") {
+					gameTimer = startingTime;
+				}
 
 				// Start em
 				startPlayers (true, true);

@@ -3097,7 +3097,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 18
-  stockFactor: 25
+  stockFactor: 35
 --- !u!114 &114428060795696726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3481,7 +3481,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerUpgradeController: {fileID: 0}
   gameManager: {fileID: 0}
-  readyButton: {fileID: 0}
+  readyButtonController: {fileID: 0}
   upgrades: []
 --- !u!114 &114586949110558936
 MonoBehaviour:
@@ -3543,7 +3543,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 40
-  stockFactor: 25
+  stockFactor: 20
 --- !u!114 &114612101623217004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4337,7 +4337,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   playerUpgradeController: {fileID: 0}
   gameManager: {fileID: 0}
-  readyButton: {fileID: 0}
+  readyButtonController: {fileID: 0}
   upgrades: []
 --- !u!114 &114935515451390998
 MonoBehaviour:
@@ -4454,7 +4454,7 @@ MonoBehaviour:
   price: 100
   priceType: {fileID: 114168344982384828}
   stock: 10
-  stockFactor: 25
+  stockFactor: 30
 --- !u!114 &114991715775043762
 MonoBehaviour:
   m_ObjectHideFlags: 1
