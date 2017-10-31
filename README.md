@@ -37,4 +37,4 @@ You only need 1 finger/touch/key to play this game.
 There's no stable release of the game currently, but that doesn't mean you can't try it.
 
 - Play in [your browser](http://amir.savandbros.com/tri-vs-tri/) (WebGL)
-- Download on [Itch.io](https://amirsavand.itch.io/tri-vs-tri) (Windows, Linux and Mac)
+- Download on [Itch.io](https://amirsavand.itch.io/tri-vs-tri) (Windows, Linux, Mac and Android)
