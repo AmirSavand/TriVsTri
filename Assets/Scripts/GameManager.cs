@@ -146,13 +146,13 @@ public class GameManager : MonoBehaviour
 				shopUI.SetActive (false);
 				finishUI.SetActive (false);
 
-				// Update game
-				gameStatus = "running";
-
 				// Reset timer if from finish
 				if (gameStatus == "finish") {
 					gameTimer = startingTime;
 				}
+
+				// Update game
+				gameStatus = "running";
 
 				// Start em
 				startPlayers (true, true);
