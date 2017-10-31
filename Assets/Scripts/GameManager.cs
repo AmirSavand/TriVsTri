@@ -230,11 +230,22 @@ public class GameManager : MonoBehaviour
 
 	public void exitGame ()
 	{
-		// Restore time scale
-		Time.timeScale = 1f;
+		// If from pause menu
+		if (gameStatus == "pause") {
+			
+			// Restore time scale
+			Time.timeScale = 1f;
 
-		// Reload scene (restore)
-		SceneManager.LoadScene ("Main");
+			// Reload scene (restore)
+			SceneManager.LoadScene ("Main");
+		} 
+
+		// Anywhere else
+		else {
+
+			// Quit game and exit to desktop
+			Application.Quit ();
+		}
 	}
 
 	public void alert (string message)
